@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion, useTransform, useViewportScroll } from 'framer-motion'
 
-import { Container } from './styles'
 import { Sticky } from '../../styles'
 
 const FirstAndSecond: React.FC = () => {
@@ -11,6 +10,10 @@ const FirstAndSecond: React.FC = () => {
 
   return (
     <Sticky className="second">
+      <img
+        className="universi"
+        src="https://data.1freewallpapers.com/download/helix-nebula-space-stars-explosion-brilliance.jpg"
+      />
       <First />
 
       <motion.div
@@ -32,6 +35,7 @@ const FirstAndSecond: React.FC = () => {
 
 const First: React.FC = () => {
   const { scrollYProgress } = useViewportScroll()
+
   const firstScale = useTransform(
     scrollYProgress,
     [0.198, 0.264, 0.558, 0.627],
@@ -48,6 +52,12 @@ const First: React.FC = () => {
     scrollYProgress,
     [0, 0.058],
     ['20vh', '100vh']
+  )
+
+  const leftSideTranslateY = useTransform(
+    scrollYProgress,
+    [0.27, 0.49],
+    ['translateY(0vh)', 'translateY(-400vh)']
   )
 
   const rightSideY = useTransform(
@@ -77,10 +87,14 @@ const First: React.FC = () => {
         <div className="a">
           <motion.div
             className="left-side"
-            style={{ height: leftSideHeight }}
+            style={{
+              height: leftSideHeight,
+              transform: leftSideTranslateY
+            }}
           />
           <div className="right-side">
-            <motion.div
+            <motion.img
+              src="https://avatars1.githubusercontent.com/u/40906956?s=460&u=d60ac8242d37f44fd9891dcdd22efd15d8ccf9d4&v=4"
               className="right-image"
               style={{ y: rightSideY, scale: rightSideScale }}
             />
